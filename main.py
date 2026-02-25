@@ -42,3 +42,9 @@ def get_categoties():
 def get_all_items():
     return items
 
+@app.get("/categories/{cat_id}/items")
+def get_item_by_category(cat_id: int):
+    result = [item for item in items if item ["category_id"] == cat_id]
+    if not result:
+        raise HTTPException(status_code=404, detail="Данной категории нет!")
+    return result
